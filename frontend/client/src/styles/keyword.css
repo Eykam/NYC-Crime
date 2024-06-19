@@ -1,0 +1,4 @@
+.keyword {
+  -tw-gradient-stops: #1f3a5f, #4d648d;
+  background-image: linear-gradient(to right, #1f3a5f, #4d648d);
+}

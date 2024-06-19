@@ -1,0 +1,9 @@
+beautifulsoup4
+transformers
+requests
+torch
+scikit-learn
+redis
+openai
+np
+dotenv

@@ -1,0 +1,123 @@
+version: "3.9"
+services:
+  redis:
+    image: redis/redis-stack:latest
+    container_name: scraper-redis-client
+    expose:
+      - 6379
+    ports:
+      - 8005:8001
+    networks:
+      - scraper-system
+      - scraper-app
+    volumes:
+      - ./redis/data:/data
+      - ./redis/redis.conf:/redis-stack.conf
+    deploy:
+      restart_policy:
+        condition: always
+
+  # scraper-0:
+  #   image: scraper-worker
+  #   build:
+  #     context: ./
+  #     dockerfile: ./scraper/Dockerfile
+  #   networks:
+  #     - scraper-system
+  #   depends_on:
+  #     - redis
+  #   volumes:
+  #     - ./scraper/cache:/root/.cache/huggingface
+  #   environment:
+  #     - SERVICE_LABEL=0
+  #   restart: on-failure:5
+  #   mem_limit: "4g"
+  #   cpus: 4
+
+  # scraper-1:
+  #   image: scraper-worker
+  #   build:
+  #     context: ./
+  #     dockerfile: ./scraper/Dockerfile
+  #   networks:
+  #     - scraper-system
+  #   depends_on:
+  #     - redis
+  #   volumes:
+  #     - ./scraper/cache:/root/.cache/huggingface
+  #   environment:
+  #     - SERVICE_LABEL=1
+  #   restart: on-failure:5
+  #   mem_limit: "4g"
+  #   cpus: 4
+
+  # scraper-2:
+  #   image: scraper-worker
+  #   build:
+  #     context: ./
+  #     dockerfile: ./scraper/Dockerfile
+  #   networks:
+  #     - scraper-system
+  #   depends_on:
+  #     - redis
+  #   volumes:
+  #     - ./scraper/cache:/root/.cache/huggingface
+  #   environment:
+  #     - SERVICE_LABEL=2
+  #   restart: on-failure:5
+  #   mem_limit: "4g"
+  #   cpus: 4
+
+  backend:
+    image: scraper-backend
+    container_name: scraper-backend-container
+    expose:
+      - 9000
+    build:
+      context: ./backend
+      dockerfile: ./Dockerfile
+    networks:
+      - scraper-app
+    depends_on:
+      - redis
+
+  nginxPeloria:
+    image: nginx:latest
+    volumes:
+      - ./gateway/nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - 83:80
+    expose:
+      - 80
+    networks:
+      - scraper-app
+    depends_on:
+      - redis
+    deploy:
+      restart_policy:
+        condition: always
+
+  frontend:
+    image: scraper-frontend
+    container_name: scraper-frontend-container
+    build:
+      context: ./frontend
+      dockerfile: ./Dockerfile
+    expose:
+      - 3000
+    volumes:
+      - ./frontend/client:/app/
+    environment:
+      WATCHPACK_POLLING: true
+    command: npm run start
+    networks:
+      - scraper-app
+    deploy:
+      restart_policy:
+        condition: always
+
+networks:
+  scraper-system:
+    driver: bridge
+  scraper-app:
+    driver: bridge
