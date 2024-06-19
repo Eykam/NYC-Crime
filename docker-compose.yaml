@@ -12,7 +12,7 @@ services:
       - scraper-app
     volumes:
       - ./redis/data:/data
-      - ./redis/redis.conf:/redis-stack.conf
+      - ./redis/dev.conf:/redis-stack.conf
     deploy:
       restart_policy:
         condition: always
