@@ -14,7 +14,7 @@ app.use((req, res, next) => {
   res.sendFile(path.join(__dirname, "./client", "build", "index.html"));
 });
 
-app.listen(PORT, process.env.MODE === "PROD" ? "0.0.0.0" : "::", () => {
+app.listen(PORT, process.env.RAILWAY_ENVIRONMENT_NAME === "production" ?  "::" : "0.0.0.0", () => {
     console.log(`server started on port ${PORT}`);
   });
   

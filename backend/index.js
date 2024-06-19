@@ -10,7 +10,7 @@ const {
 
 require("dotenv").config();
 
-const port = process.env.port || 9000;
+const port = process.env.PORT || 9000;
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -60,6 +60,6 @@ app.post("/similar", async (req, res) => {
   }
 });
 
-app.listen(port, "0.0.0.0", () => {
+app.listen(port, process.env.RAILWAY_ENVIRONMENT_NAME === "production" ?  "::" : "0.0.0.0", () => {
   console.log(`server started on port ${port}`);
 });
