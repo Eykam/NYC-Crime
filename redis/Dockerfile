@@ -2,10 +2,10 @@ FROM redis/redis-stack:latest
 
 WORKDIR /app
 
-COPY ./data /app/data
-COPY ./redis.conf ./redis.conf
+COPY ./data /data
+COPY ./redis.conf /redis-stack.conf
 
 
 EXPOSE 6379
 
-CMD ["redis-stack-server", "./redis.conf"]
+CMD ["redis-stack-server"]
