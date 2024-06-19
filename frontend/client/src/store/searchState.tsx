@@ -1,6 +1,6 @@
 import { create } from "zustand";
 
-const BACKEND_BASE_URL = "";
+const BACKEND_BASE_URL = "/api";
 const HEADLINE_ENDPOINT = "/search";
 const SIMILARITY_ENDPOINT = "/similar";
 
