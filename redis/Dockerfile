@@ -1,4 +1,4 @@
-FROM redis:latest
+FROM redis-stack:latest
 
 WORKDIR /app
 
