@@ -20,8 +20,8 @@ services:
   # scraper-0:
   #   image: scraper-worker
   #   build:
-  #     context: ./
-  #     dockerfile: ./scraper/Dockerfile
+  #     context: ./scraper
+  #     dockerfile: ./Dockerfile
   #   networks:
   #     - scraper-system
   #   depends_on:
@@ -37,8 +37,8 @@ services:
   # scraper-1:
   #   image: scraper-worker
   #   build:
-  #     context: ./
-  #     dockerfile: ./scraper/Dockerfile
+  #     context: ./scraper
+  #     dockerfile: ./Dockerfile
   #   networks:
   #     - scraper-system
   #   depends_on:
@@ -54,8 +54,8 @@ services:
   # scraper-2:
   #   image: scraper-worker
   #   build:
-  #     context: ./
-  #     dockerfile: ./scraper/Dockerfile
+  #     context: ./scraper
+  #     dockerfile: ./Dockerfile
   #   networks:
   #     - scraper-system
   #   depends_on:
