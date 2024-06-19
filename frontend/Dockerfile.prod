@@ -10,7 +10,6 @@ RUN yes | npm install
 
 COPY ./client/package.json ./client/package.json
 COPY ./client/package-lock.json ./client/package-lock.json
-COPY ./client/declarations.d.ts ./client/declarations.d.ts
 COPY ./client/tailwind.config.js ./client/tailwind.config.js
 COPY ./client/tsconfig.json ./client/tsconfig.json
 COPY ./client/public ./client/public
