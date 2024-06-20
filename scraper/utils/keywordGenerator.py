@@ -4,7 +4,7 @@ from openai import OpenAI
 
 API_KEY = os.getenv("OPENAI_KEY")
 MODEL = os.getenv("OPENAI_MODEL")
-MAX_TOKENS = os.getenv("OPENAI_MAX_TOKENS")
+MAX_TOKENS = int(os.getenv("OPENAI_MAX_TOKENS"))
 
 
 def get_GPT_client():
