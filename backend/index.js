@@ -6,6 +6,7 @@ const { getTopMatchesForKeywords } = require("./utils/similarity");
 const {
   findHeadlineByKeyword,
   getFirst50KeysFromHeadlines,
+  getLastUpdated,
 } = require("./utils/utils");
 
 require("dotenv").config();
@@ -59,6 +60,12 @@ app.post("/similar", async (req, res) => {
     res.status(400).send();
   }
 });
+
+app.get("/last_updated", async (req,res) => {
+  const timestamp = await getLastUpdated()
+  console.log("timestamp", timestamp)
+  res.send(timestamp)
+})
 
 app.listen(port, process.env.RAILWAY_ENVIRONMENT_NAME === "production" ?  "::" : "0.0.0.0", () => {
   console.log(`server started on port ${port}`);

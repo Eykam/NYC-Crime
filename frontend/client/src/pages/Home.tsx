@@ -1,8 +1,7 @@
 import SearchBar from "../components/searchBar";
 import HeadlinesContainer from "../components/headlinesContainer";
 import ChartWrapper from "../components/chartWrapper";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
+import Timestamp from "../components/timestamp";
 
 const Home = () => {
   return (

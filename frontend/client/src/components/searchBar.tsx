@@ -6,6 +6,7 @@ import useSearchStore from "../store/searchState";
 import Keyword from "./keyword";
 import Download from "./download";
 import { motion } from "framer-motion";
+import Timestamp from "./timestamp";
 
 const SearchBar = () => {
   const [isActive, setActive] = useState(false);
@@ -46,7 +47,8 @@ const SearchBar = () => {
 
   return (
     <>
-      <Box className="flex justify-between h-[5%] mt-[5%]">
+      <Timestamp />
+      <Box className="flex justify-between h-[5%]">
         <motion.div
           className="flex flex-row bg-gray-600 w-[100%] md:w-[40%] rounded-lg overflow-hidden self-start items-center"
           whileHover={{ scale: 1.02 }}

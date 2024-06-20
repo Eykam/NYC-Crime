@@ -1,7 +1,7 @@
 import os
 import requests
 import threading
-from redisDriver import connect_to_redis, store_headline, store_keywords_reverse_index, check_headline_exists
+from redisDriver import connect_to_redis, store_headline, store_keywords_reverse_index, check_headline_exists, update_timestamp
 from keywordGenerator import get_GPT_client, get_keywords
 from embedder import create_embedder, embed_keywords
 from transformers import pipeline
@@ -54,6 +54,7 @@ class Worker:
                     store_headline(self.redis, headline, serialized)
                     store_keywords_reverse_index(self.redis, headline, keywords)
                     embed_keywords(self.embedder, self.redis, keywords)
+                    update_timestamp(self.redis)
                         
                     return serialized
         

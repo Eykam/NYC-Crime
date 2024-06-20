@@ -3,6 +3,7 @@ import { create } from "zustand";
 const BACKEND_BASE_URL = "/api";
 const HEADLINE_ENDPOINT = "/search";
 const SIMILARITY_ENDPOINT = "/similar";
+const LAST_UPDATED_ENDPOINT = "/last_updated"
 
 const sanitizeInput = (inputString: string) => {
   const input = inputString
@@ -48,6 +49,8 @@ export interface Headlines {
 }
 
 interface SearchStore {
+  lastUpdated:number;
+  fetchLastUpdated:() => void;
   keywords: string[];
   setKeywords: (keywords: string[]) => void;
   headlines: Headlines;
@@ -60,6 +63,15 @@ interface SearchStore {
 }
 
 const useSearchStore = create<SearchStore>((set, get) => ({
+  lastUpdated:null!,
+  fetchLastUpdated: async () => {
+    const url = BACKEND_BASE_URL + LAST_UPDATED_ENDPOINT
+    const res = await fetch(url)
+    const lastUpdatedText = await res.text()
+    console.log("text",lastUpdatedText)
+    const lastUpdated = parseInt(lastUpdatedText)
+    set({lastUpdated})
+  },
   keywords: [],
   setKeywords: (keywords: string[]) => set({ keywords: keywords }),
 

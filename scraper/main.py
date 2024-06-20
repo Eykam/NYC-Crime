@@ -1,9 +1,10 @@
+from dotenv import load_dotenv, find_dotenv
+load_dotenv(find_dotenv())
+
 from utils import Worker
 from pages import CBS, NBC, NYDaily
-from dotenv import load_dotenv
 import os
 
-load_dotenv()
 
 PAGE_MAP = {
     0 : CBS,

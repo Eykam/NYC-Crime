@@ -67,4 +67,14 @@ async function getFirst50KeysFromHeadlines() {
   }
 }
 
-module.exports = { getFirst50KeysFromHeadlines, findHeadlineByKeyword };
+async function getLastUpdated(){
+  try{
+    const timestamp = await client.get("last_updated")
+    return timestamp
+  } catch (e) {
+    console.log("error getting last updated timestamp", e);
+    return Date.now()
+  }
+}
+
+module.exports = { getFirst50KeysFromHeadlines, findHeadlineByKeyword, getLastUpdated };
