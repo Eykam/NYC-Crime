@@ -4,10 +4,7 @@ require("dotenv").config();
 const REDIS_PORT = process.env.REDIS_PORT;
 const REDIS_HOST = process.env.REDIS_HOST;
 
-const client = new Redis({
-  host: REDIS_HOST,
-  port: REDIS_PORT,
-});
+const client = new Redis(`redis://${REDIS_HOST}:${REDIS_PORT}`);
 
 function cosineSimilarity(vectorA, vectorB) {
   if (vectorA.length !== vectorB.length) {
