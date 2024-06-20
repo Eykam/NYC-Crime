@@ -4,10 +4,7 @@ require("dotenv").config();
 const REDIS_PORT = process.env.REDIS_PORT;
 const REDIS_HOST = process.env.REDIS_HOST;
 
-const client = new Redis({
-  host: REDIS_HOST,
-  port: REDIS_PORT,
-});
+const client = new Redis(REDIS_PORT, REDIS_HOST);
 
 async function getHeadlineData(headline) {
   try {
@@ -67,14 +64,18 @@ async function getFirst50KeysFromHeadlines() {
   }
 }
 
-async function getLastUpdated(){
-  try{
-    const timestamp = await client.get("last_updated")
-    return timestamp
+async function getLastUpdated() {
+  try {
+    const timestamp = await client.get("last_updated");
+    return timestamp;
   } catch (e) {
     console.log("error getting last updated timestamp", e);
-    return Date.now()
+    return Date.now();
   }
 }
 
-module.exports = { getFirst50KeysFromHeadlines, findHeadlineByKeyword, getLastUpdated };
+module.exports = {
+  getFirst50KeysFromHeadlines,
+  findHeadlineByKeyword,
+  getLastUpdated,
+};
