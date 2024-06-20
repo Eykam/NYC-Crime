@@ -4,7 +4,7 @@ require("dotenv").config();
 const REDIS_PORT = process.env.REDIS_PORT;
 const REDIS_HOST = process.env.REDIS_HOST;
 
-const client = new Redis(`redis://${REDIS_HOST}:${REDIS_PORT}`);
+const client = new Redis(`redis://${REDIS_HOST}:${REDIS_PORT}/0?family=0`);
 
 async function getHeadlineData(headline) {
   try {
