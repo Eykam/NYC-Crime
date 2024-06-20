@@ -1,4 +1,4 @@
-FROM redis/redis-stack:latest
+FROM redis/redis-stack-server:latest
 
 WORKDIR /app
 
@@ -8,4 +8,4 @@ COPY ./redis.conf /redis-stack.conf
 
 EXPOSE 6379
 
-CMD ["redis-stack-server"]
+CMD ["redis-stack-server", "/redis-stack.conf"]
