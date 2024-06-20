@@ -6,4 +6,4 @@ scikit-learn
 redis
 openai
 np
-dotenv
+python-dotenv
