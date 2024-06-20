@@ -10,4 +10,4 @@ RUN yes | npm install
 
 COPY ./ ./
 
-CMD sleep 3 && node index.js
+CMD npm run start
