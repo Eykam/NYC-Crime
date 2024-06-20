@@ -36,3 +36,4 @@ def get_page_from_service_label():
 
 if __name__ == "__main__":
     main()
+    exit(0)
