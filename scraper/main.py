@@ -1,6 +1,11 @@
 from dotenv import load_dotenv, find_dotenv
-load_dotenv(find_dotenv())
 
+try:
+    load_dotenv(find_dotenv())
+except Exception as e:
+    print("Error loading dotenv")
+    print(e)
+    
 from utils import Worker
 from pages import CBS, NBC, NYDaily
 import os
